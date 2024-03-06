@@ -6,20 +6,20 @@
 #    By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/21 01:43:02 by bloisel           #+#    #+#              #
-#    Updated: 2024/03/05 17:50:05 by bloisel          ###   ########.fr        #
+#    Updated: 2024/03/05 17:47:42 by bloisel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 LIBFTNAME = libft.a
 
-CFLAGS =   
+CFLAGS =  
 DEBUG = -g -O0
 
 
 SRCS = srcs/main.c \
-       srcs/s.quote.c \
 	   srcs/input.c \
+	   srcs/s.quote.c \
 	   srcs/utils.c
 
 OBJS = $(SRCS:.c=.o)

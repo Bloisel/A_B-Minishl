@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/02/29 16:36:50 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/06 18:55:37 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	main()
 			add_history(input);
 		}
 		getln(input);
+		s_quote(&dta, input);
+		
 		// free(input);
 	}
 	return (0);

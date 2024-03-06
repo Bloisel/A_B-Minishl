@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/02/29 16:39:23 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/06 15:00:31 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,17 @@ typedef	struct			s_tab
 
 typedef struct s_data
 {
+	char *cmd;
+	char *wc;
 	char *input;
 	int 	error;
 	char **envv;
 	char *envh;
 }t_data;
 
+
+int error_s_quote();
+int s_quote(t_data *dta, char *str);
 void getln(char *str);
 char	*trytry(char **env, t_data *dta);
 char **separate(char *env);
