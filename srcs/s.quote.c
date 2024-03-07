@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 09:40:27 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/07 16:04:06 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/07 17:27:45 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ int s_quote2(t_data *dta, int splq, int dblq)
     printf("\n");
     if (splq && !dblq)
     {
+        printf("Error SINGLE\n");
         error_s_quote();
         return (-2);
     }
-    if (dblq)
+    if (dblq && !splq)
     {
-        printf("double quote faux");
+        printf("Error DOUBLE\n");
         error_s_quote();
         return (-2);
     }
