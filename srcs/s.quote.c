@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 09:40:27 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/06 19:12:26 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/07 16:04:06 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,62 +18,19 @@ int error_s_quote()
     return (-1);
 }
 
-int ntg(t_data *dta , char c)
+int s_quote2(t_data *dta, int splq, int dblq)
 {
-    int i;
-
-    i = 0;
-
-    while(dta->wc[i])
+    printf("\n");
+    if (splq && !dblq)
     {
-        if (dta->wc[i] == c)
-            return (-1);
-        i++; 
+        error_s_quote();
+        return (-2);
     }
-    return (1);
-}
-
-int d_quote(t_data *dta)
-{
-    int i;
-    int j;
-
-    i = 0;
-    dta->wc = (char *)malloc((ft_strlen(dta->cmd) + 1)*sizeof(char));    
-    ft_bzero(dta->wc , ft_strlen(dta->cmd));
-    while (dta->cmd[i])
+    if (dblq)
     {
-        if (dta->cmd[i] == 34)
-        {
-            if (dta->cmd[i + 1] == '\0')
-            {
-                printf("err0\n");
-                error_s_quote();
-                return (-2);
-            }
-            j = 0;
-            i++;
-            while(dta->cmd[i] && dta->cmd[i] != 34)
-            {
-                dta->wc[j] = dta->cmd[i];
-                if (dta->cmd[i + 1] == '\0')
-                {
-                    printf("err1\n");
-                    error_s_quote();
-                    return (-2);
-                }
-                if (dta->cmd[i] == 34)
-                {
-                    dta->wc[j] = '\0';
-                    printf("copie egale = %s\n", dta->wc);
-                    return (1);
-                    break;
-                }
-                i++;
-                j++;
-            }
-        }
-        i++; 
+        printf("double quote faux");
+        error_s_quote();
+        return (-2);
     }
     return (1);
 }
@@ -82,33 +39,31 @@ int s_quote(t_data *dta , char *str)
 {
     int i;
     int j;
+    int dblq;
+    int splq;
 
-    j = 0;
+    splq = 0;
+    dblq = 0;
+    // init de boolens , splq = 0 (faux) // !splq # de splq donc de 0 et donc !splq = 1 et vrais 
     i = 0;
-    dta->cmd = ft_strdup(str);
+    j = 0;
     while (dta->cmd[i])
     {
         if (dta->cmd[i] == 39)
         {
-            if (dta->cmd[i + 1] == '\0')
+            if(!dblq)
             {
-                printf("err2\n");
-                error_s_quote();
-                return (-2);
-            }
-            i++;
-            while(dta->cmd[i] && dta->cmd[i] != 39)
-            {
-                if(dta->cmd[i + 1] == '\0')
-                {
-                    printf("err3\n");
-                    error_s_quote();
-                    return (-2);
-                }
-                i++;      
+                splq = !splq;
             }
         }
-        i++;
+        else if (dta->cmd[i] == 34)
+        {
+            dblq = !dblq;
+        }
+        //else
+        //    ft_putchar_fd(dta->cmd[i] , 0);
+        i++;   
     }
+    s_quote2(dta , splq , dblq);
     return (1);
 }

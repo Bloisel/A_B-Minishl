@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/06 18:55:37 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/07 17:19:27 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char *take_input()
 	return readline("~$");
 }
 
-int	main() 
+int	main(char **env) 
 {
 	t_data	dta;
 	char *input;	
@@ -29,17 +29,17 @@ int	main()
 		
 		if (input == NULL)
 		{
-			printf("\n");
 			break;
 		}
 		if (ft_strlen(input) > 0)
 		{
 			add_history(input);
 		}
-		getln(input);
+		//getln(input);
+		set_v(&dta , input);
 		s_quote(&dta, input);
-		
-		// free(input);
+		printf("%s\n",dta.cmd);
+		free(input);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/21 01:43:02 by bloisel           #+#    #+#              #
-#    Updated: 2024/03/05 17:50:05 by bloisel          ###   ########.fr        #
+#    Updated: 2024/03/07 15:29:07 by bloisel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ DEBUG = -g -O0
 
 SRCS = srcs/main.c \
        srcs/s.quote.c \
+       srcs/pars.quote.c \
 	   srcs/input.c \
 	   srcs/utils.c
 
