@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 14:54:10 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/07 16:11:11 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/08 15:56:12 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void replace_quote(t_data *dta)
     }
 }
 
+// pb remove single dans double ex : 'bast' "'"
 void  remove_q(t_data *dta)
 {
     int i;
@@ -45,7 +46,7 @@ void  remove_q(t_data *dta)
     j = 0;
     while (dta->cmd[i])
     {
-        if (dta->cmd[i] == 34 || dta->cmd[i] == 39)
+        if (dta->cmd[i] == 34 || dta->cmd[i] == 39 && dta->count != 100)
             ;
         else
         {

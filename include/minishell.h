@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/07 16:20:38 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/08 15:26:38 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ typedef	struct			s_tab
 
 typedef struct s_data
 {
+	int count;
+	const char *arg_env;
+	char *cmd_env;
 	char *cmd;
 	char *wc;
 	int 	error;
@@ -42,6 +45,9 @@ typedef struct s_data
 }t_data;
 
 
+const char *get_envln(t_data *dta);
+char **env_split(char *env, t_data *dta);
+int env_copy(char **env, t_data *dta);
 void meta_pars(t_data *dta);
 void replace_quote(t_data *dta);
 void  remove_q(t_data *dta);

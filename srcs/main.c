@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/07 17:19:27 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/08 15:56:43 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ char *take_input()
 	return readline("~$");
 }
 
-int	main(char **env) 
+int	main(int argc, char **argv, char **env) 
 {
 	t_data	dta;
 	char *input;	
-	
+		
 	init_data(&dta);
+
 	while (1)
 	{
 		 input = take_input();	
@@ -35,11 +36,15 @@ int	main(char **env)
 		{
 			add_history(input);
 		}
-		//getln(input);
 		set_v(&dta , input);
 		s_quote(&dta, input);
+		remove_q(&dta);
 		printf("%s\n",dta.cmd);
+		//printf("%s\n",dta.cmd);
+		//if (env_copy(env , &dta) == 0)
+		//	printf("%s\n",dta.cmd);
 		free(input);
-	}
+	} 
 	return (0);
-}
+} 
+
