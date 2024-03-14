@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/08 15:26:38 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/14 18:39:24 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,8 @@ void getln(char *str);
 char	*trytry(char **env, t_data *dta);
 char **separate(char *env);
 void	init_data(t_data *dta);
+int error_redir();
+int s_redir(t_data *dta);
+
 
 #endif 
