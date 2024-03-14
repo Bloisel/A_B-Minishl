@@ -70,25 +70,3 @@ void	init_data(t_data *dta)
 	dta->count = 0;
 	dta->error = 0;
 }
-
-int search_c(t_data *dta , char c)
-{
-    int i;
-
-    i = 0;
-
-    while(dta->wc[i])
-    {
-        if (dta->wc[i] == c)
-            return (-1);
-        i++; 
-    }
-    return (1);
-}
-
-int	is_sep(char c)
-{
-	if (c == '\n' || c == ' ')
-		return (1);
-	return (0);
-}

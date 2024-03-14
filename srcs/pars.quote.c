@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 14:54:10 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/08 15:56:12 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/14 15:32:08 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void replace_quote(t_data *dta)
      
     while (dta->cmd[++i])
     {
-        if (dta->cmd[i] == 34)
+        if (dta->cmd[i] == 34 && dq == -1)
             dq *= -1;
-        if (dta->cmd[i] == 39)
+        if (dta->cmd[i] == 39 && sq == -1)
             sq *= -1;
         if (dq == 1 && (dta->cmd[i] == 34 || dta->cmd[i] == '$'
                 || is_sep(dta->cmd[i])))
@@ -36,7 +36,6 @@ void replace_quote(t_data *dta)
     }
 }
 
-// pb remove single dans double ex : 'bast' "'"
 void  remove_q(t_data *dta)
 {
     int i;
@@ -58,33 +57,4 @@ void  remove_q(t_data *dta)
     dta->wc[j] = '\0';
     free(dta->cmd);
     dta->cmd = dta->wc;
-}
-
-void meta_pars(t_data *dta)
-{
-    int i;
-    
-    i = 0;
-    while (dta->cmd[i])
-    {
-        if (dta->cmd[i] == 39)
-        {
-            i++;
-            while (dta->cmd[i] != 39)
-            {
-                replace_quote(dta);
-                i++;
-            } 
-        }
-        if (dta->cmd[i] == 34)
-        {
-            i++;
-            while (dta->cmd[i] != 34)
-            {
-                replace_quote(dta);
-                i++;
-            }
-        }
-        i++;
-    }
 }

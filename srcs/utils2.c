@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 09:13:45 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/07 09:22:03 by bloisel          ###   ########.fr       */
+/*   Created: 2024/03/14 15:34:59 by bloisel           #+#    #+#             */
+/*   Updated: 2024/03/14 17:40:42 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void getln(char *str)
-{
-	int i = 0;
-		if (str != NULL)
-		{
-				printf("%s\n",str);
-		}
-}
 
 int set_v(t_data *dta, char *str)
 {
@@ -37,5 +28,12 @@ int set_v(t_data *dta, char *str)
 	}
 	ft_bzero(dta->wc, ft_strlen(dta->cmd));
 	// fonction error g error etc
+	return (0);
+}
+
+int	is_sep(char c)
+{
+	if (c == '\n' || c == ' ' || c == '\t')
+		return (1);
 	return (0);
 }
