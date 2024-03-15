@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/14 16:57:27 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/15 14:20:46 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		set_v(&dta , input);
 		s_quote(&dta, input);
+		s_redir(&dta);
 		//replace_quote(&dta);
 		//remove_q(&dta);
 		printf("%s\n",dta.cmd);

@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/14 18:39:24 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/03/15 14:55:43 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	char *cmd_env;
 	char *cmd;
 	char *wc;
+	char *copy;
 	int 	error;
 	char **envv;
 	char *envh;
@@ -62,6 +63,8 @@ char **separate(char *env);
 void	init_data(t_data *dta);
 int error_redir();
 int s_redir(t_data *dta);
-
+int copystr_redir(t_data *dta);
+int error_redir();
+int skip_wh(char *str, int pos);
 
 #endif 
