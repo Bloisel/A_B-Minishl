@@ -12,6 +12,7 @@
 
 #include "../include/minishell.h"
 
+// $HOME on reccupere ce quil ya apres le =  (parcour la chaine echo $HONME $HOME jusqua char fin) join les deux bouts modifier join 
 // parser de maniere a ce que ft_strncmp de ce quil ya apres un dollars jusqua un delimiteur determiner quel sont les delimiteurs white space ou quotes 
 int env_copy(char **env, t_data *dta)
 {
@@ -33,7 +34,7 @@ int env_copy(char **env, t_data *dta)
 		i++;
 	//dta->wc[i] = '\0';
 	/*dta->cmd_env = ft_strdup(dta->wc);
-	printf("%s\n", dta->cmd_env);
+	printf("%s\n", dtal->cmd_env);
 	len = (j - i);
 	len--;
 	printf("ma len %d\n", len);
@@ -62,6 +63,9 @@ const char *get_envln(t_data *dta)
 void	init_data(t_data *dta)
 {
 	dta->cmd = NULL;
+	dta->cmdwh = NULL;
+	dta->copy = NULL;
+	dta->cmd_rdr = NULL;
 	dta->wc = NULL;
 	dta->envh = NULL;
 	dta->envv = NULL;
@@ -69,4 +73,18 @@ void	init_data(t_data *dta)
 	dta->cmd_env = NULL;
 	dta->count = 0;
 	dta->error = 0;
+}
+
+char *ft_strncpy(char *s1, char *s2, int n)
+{
+    int i = 0;
+    int j = 0;
+
+    while (i < n && s2[i])
+    {
+        s1[i] = s2[i];
+        i++;
+    }
+    s1[i] = '\0';
+    return (s1);
 }

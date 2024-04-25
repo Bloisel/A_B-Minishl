@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/15 14:55:43 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:39:04 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ typedef	struct			s_tab
 typedef struct s_data
 {
 	int count;
+	char *cmdwh;
 	const char *arg_env;
 	char *cmd_env;
+	char *cmd_rdr;
 	char *cmd;
 	char *wc;
 	char *copy;
@@ -62,9 +64,20 @@ char	*trytry(char **env, t_data *dta);
 char **separate(char *env);
 void	init_data(t_data *dta);
 int error_redir();
-int s_redir(t_data *dta);
+int s_redir(t_data *dta, int i, int k, int start,int end);
 int copystr_redir(t_data *dta);
 int error_redir();
 int skip_wh(char *str, int pos);
+char *ft_strncpy(char *s1, char *s2, int n);
+int s_redir2(t_data *dta, int j, int start, int end, int i);
+int s_redir3(t_data *dta, int k);
+char *take_input2();
+int arg_redir(t_data *dta);
+int init_intforredir(t_data *dta);
+char	*ft_jointventure(char const *s1, char const *s2);
+int is_sep2(char c);
+int countwh_sep(t_data *dta);
+char *add_whsep(t_data *dta);
 
-#endif 
+
+#endif

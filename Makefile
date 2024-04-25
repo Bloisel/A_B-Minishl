@@ -6,7 +6,7 @@
 #    By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/21 01:43:02 by bloisel           #+#    #+#              #
-#    Updated: 2024/03/15 14:22:26 by bloisel          ###   ########.fr        #
+#    Updated: 2024/04/25 12:18:00 by bloisel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = srcs/main.c \
        srcs/s.quote.c \
        srcs/pars.quote.c \
        srcs/pars.redir.c \
+       srcs/pars.redir2.c\
 	   srcs/utils2.c \
 	   srcs/utils.c
 
