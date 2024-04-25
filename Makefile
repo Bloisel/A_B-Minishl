@@ -6,7 +6,7 @@
 #    By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/21 01:43:02 by bloisel           #+#    #+#              #
-#    Updated: 2024/04/25 12:18:00 by bloisel          ###   ########.fr        #
+#    Updated: 2024/04/25 15:17:18 by bloisel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ LIBFTNAME = libft.a
 
 CFLAGS =   
 DEBUG = -g -O0
-
 
 SRCS = srcs/main.c \
        srcs/s.quote.c \
