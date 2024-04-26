@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/04/25 14:39:04 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/04/26 14:35:34 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*trytry(char **env, t_data *dta);
 char **separate(char *env);
 void	init_data(t_data *dta);
 int error_redir();
-int s_redir(t_data *dta, int i, int k, int start,int end);
+int s_redir(t_data *dta);
 int copystr_redir(t_data *dta);
 int error_redir();
 int skip_wh(char *str, int pos);
@@ -78,6 +78,7 @@ char	*ft_jointventure(char const *s1, char const *s2);
 int is_sep2(char c);
 int countwh_sep(t_data *dta);
 char *add_whsep(t_data *dta);
+int is_sep3(t_data *dta, int pos);
 
 
 #endif

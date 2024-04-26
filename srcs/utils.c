@@ -75,6 +75,25 @@ void	init_data(t_data *dta)
 	dta->error = 0;
 }
 
+int set_v(t_data *dta, char *str)
+{
+	dta->cmd = ft_strdup(str);
+	if (dta->cmd == NULL)
+	{
+		printf("Error Memory allocation\n");
+		return (-1);
+	}
+	dta->wc = (char *)malloc((ft_strlen(dta->cmd) + 1)*sizeof(char));
+	if (dta->wc == NULL)
+	{
+		printf("Error memory allocation\n");
+		return (-1);	
+	}
+	ft_bzero(dta->wc, ft_strlen(dta->cmd));
+	// fonction error g error etc
+	return (0);
+}
+
 char *ft_strncpy(char *s1, char *s2, int n)
 {
     int i = 0;

@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:32:26 by bloisel           #+#    #+#             */
-/*   Updated: 2024/04/25 13:33:49 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/04/26 15:32:43 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 // echo dd > bb < ss
 // echo << ls << la a GERER 
 // cat << ls | cat
+// cas erreur cat <ls 
 // chaine de characteres qui recupper cat ls << la << dhhdhdhd < jdjdj < bast < etc.. 
 
 int error_redir()
@@ -25,7 +26,7 @@ int error_redir()
     return (-1);
 }
 
-int init_intforredir(t_data *dta)
+/*int init_intforredir(t_data *dta)
 {
     int i;
     int k;
@@ -36,13 +37,20 @@ int init_intforredir(t_data *dta)
     k = 0;
     start = 0;
     end = 0;
-    s_redir(dta, i , k , start , end); 
-}
+}*/
 
-int s_redir(t_data *dta, int i, int k, int start,int end)
+int s_redir(t_data *dta)
 {
+    int k;
+    int end;
+    int start;
     int j;
+    int i;
 
+    k = 0;
+    start = 0;
+    end = 0;
+    i = 0;
     j = 0;
     //arg_redir(dta);
     while (dta->cmd[i])
@@ -51,9 +59,17 @@ int s_redir(t_data *dta, int i, int k, int start,int end)
         {
             k = skip_wh(dta->cmd , i);
             if (k == 1 && dta->cmd[i + k] != '\0' && dta->cmd[i + k] != dta->cmd[i])
+            {
+                printf("%c\n",dta->cmd[i]);
+                printf("%c\n",dta->cmd[i + k]);
+                printf("ok\n");
                 return (error_redir());
+            }
             if (k > 1 && dta->cmd[i + k] && (dta->cmd[i + k] == '>' || dta->cmd[i + k] == '<'))
+            {
+                printf("ok2");
                 return (error_redir());
+            }
             if (k == 1 && dta->cmd[i + k] == dta->cmd[i] && dta->cmd[i] == '<')
             {
                 s_redir2(dta, j, start, end, i);

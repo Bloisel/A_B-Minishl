@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/04/25 13:50:40 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/04/26 14:43:41 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,13 @@ int	main(int argc, char **argv, char **env)
 		}
 		set_v(&dta , input);
 		s_quote(&dta, input);
-		//init_intforredir(&dta);
 		countwh_sep(&dta);
-		free(input);
-	} 
+		s_redir(&dta);
+		
+		//countwh_sep(&dta);
+		//init_intforredir(&dta);
+		//free(input);
+	}
 	return (0);
 } 
 

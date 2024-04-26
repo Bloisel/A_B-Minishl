@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:15:43 by bloisel           #+#    #+#             */
-/*   Updated: 2024/04/25 12:25:24 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/04/26 14:32:26 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int s_redir3(t_data *dta, int k)
 		if (ft_strlen(input) > 0)
 			add_history(input);
         if (ft_strncmp(input , dta->copy , k) == 0)
+        {
+            return (0);
             break;
+        }
         //else
         //    dta->cmd_rdr = ft_strjoin(dta->cmd_rdr , input);
     }
@@ -71,7 +74,7 @@ int arg_redir(t_data *dta)
     return (0);
 }
 
-
+// a modifier 
 char	*ft_jointventure(char const *s1, char const *s2)
 {
 	size_t	i;
