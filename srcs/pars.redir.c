@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:32:26 by bloisel           #+#    #+#             */
-/*   Updated: 2024/04/26 15:32:43 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/04/30 18:34:25 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int error_redir()
     end = 0;
 }*/
 
-int s_redir(t_data *dta)
+
+// skip white space dans fonction avant malloc 
+char *s_redir(t_data *dta,char *str)
 {
     int k;
     int end;
@@ -52,32 +54,31 @@ int s_redir(t_data *dta)
     end = 0;
     i = 0;
     j = 0;
-    //arg_redir(dta);
-    while (dta->cmd[i])
+    while (dta->cmdwh[i])
     {
-        if (dta->cmd[i] == '>' || dta->cmd[i] == '<')
+        if (dta->cmdwh[i] == '>' || dta->cmdwh[i] == '<')
         {
-            k = skip_wh(dta->cmd , i);
-            if (k == 1 && dta->cmd[i + k] != '\0' && dta->cmd[i + k] != dta->cmd[i])
+            k = skip_wh(dta->cmdwh , i);
+            if (k == 1 && dta->cmdwh[i + k] == '\0' && dta->cmdwh[i + k] != dta->cmdwh[i])
             {
-                printf("%c\n",dta->cmd[i]);
-                printf("%c\n",dta->cmd[i + k]);
-                printf("ok\n");
-                return (error_redir());
+                EXIT_FAILURE;
+                //return (error_redir());
             }
-            if (k > 1 && dta->cmd[i + k] && (dta->cmd[i + k] == '>' || dta->cmd[i + k] == '<'))
+            if (k > 1 && dta->cmdwh[i + k] && (dta->cmdwh[i + k] == '>' || dta->cmdwh[i + k] == '<'))
             {
-                printf("ok2");
-                return (error_redir());
+                EXIT_FAILURE;
+                //return (error_redir());
             }
-            if (k == 1 && dta->cmd[i + k] == dta->cmd[i] && dta->cmd[i] == '<')
+            if (k == 1 && dta->cmdwh[i + k] == dta->cmdwh[i] && dta->cmdwh[i] == '<')
             {
+                arg_redir(dta);
                 s_redir2(dta, j, start, end, i);
+                return (dta->cmd_rdr);
             }
         } 
         i++;        
-    }    
-    return (0);
+    }   
+    return (dta->cmd_rdr);
 }
 
 int s_redir2(t_data *dta, int j, int start, int end, int i)
@@ -86,10 +87,10 @@ int s_redir2(t_data *dta, int j, int start, int end, int i)
 
     k = 0;
     j = (i + 2);
-    while (dta->cmd[j] == ' ')
+    while (dta->cmdwh[j] == ' ')
         j++;
     start = j;
-    while (dta->cmd[j] != '\0' && dta->cmd[j] != '|' && dta->cmd[j] != ' ')
+    while (dta->cmdwh[j] != '\0' && dta->cmdwh[j] != '|' && dta->cmdwh[j] != ' ')
         j++;
     j--;
     end = j;
@@ -97,7 +98,7 @@ int s_redir2(t_data *dta, int j, int start, int end, int i)
     if (dta->copy == NULL)
         return (-1);
     if (end > start)
-        ft_strncpy(dta->copy, &dta->cmd[start], (j - start + 1));
+        ft_strncpy(dta->copy, &dta->cmdwh[start], (j - start + 1));
     k = (j - start + 1);
     s_redir3(dta, k);
 }

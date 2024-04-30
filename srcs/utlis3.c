@@ -6,17 +6,22 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 10:34:59 by bloisel           #+#    #+#             */
-/*   Updated: 2024/04/26 13:32:16 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/04/30 14:59:40y bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+
+// cas echo <<(2,3,4 spaces) ls
+
 
 int countwh_sep(t_data *dta)
 {
 	int i;
 	int j;
 	int k;
+	int res;
 
 	j = 0;
 	i = 0;
@@ -45,11 +50,12 @@ int countwh_sep(t_data *dta)
 		}
 		i++;	
 	}
+	res = i + j;
 	dta->cmdwh = (char *)malloc(sizeof(char *) * (i + j) + 1);
-	add_whsep(dta);
+	add_whsep(dta, res);
 }
 
-char *add_whsep(t_data *dta)
+char *add_whsep(t_data *dta, int res)
 {
 	int i;
 	int k;
@@ -59,7 +65,7 @@ char *add_whsep(t_data *dta)
 	i = 0;
 	j = 0;
 	
-	while (dta->cmd[i] && i <= j)
+	while (dta->cmd[i] && res >= j)
 	{
 		if (is_sep2(dta->cmd[i]) == 1)
 		{
@@ -70,10 +76,10 @@ char *add_whsep(t_data *dta)
 				{
 					dta->cmdwh[j++] = 32;
 				}
-				dta->cmdwh[j] = dta->cmd[i];
-				if (is_sep(dta->cmd[i++ + 1]) == 0)
+				dta->cmdwh[j++] = dta->cmd[i];
+				i++;
+				if (is_sep(dta->cmd[i + 1]) == 0)
 				{
-					j++;
 					dta->cmdwh[j++] = 32;
 				}
 			}
@@ -83,11 +89,12 @@ char *add_whsep(t_data *dta)
 				{
 					dta->cmdwh[j++] = 32;
 				}
-				dta->cmdwh[j++] = dta->cmd[i++];
-				dta->cmdwh[j] = dta->cmd[i];
-				if (is_sep(dta->cmd[i++ + 1]) == 0)
+				dta->cmdwh[j++] = dta->cmd[i];
+				dta->cmdwh[j++] = dta->cmd[++i];
+				i++;
+				if (is_sep(dta->cmd[i + 1]) == 0)
 				{
-					dta->cmdwh[++j] = 32;
+					dta->cmdwh[j] = 32;
 					j++;
 				}
 			}
@@ -95,6 +102,6 @@ char *add_whsep(t_data *dta)
 		dta->cmdwh[j++] = dta->cmd[i++];
 	}
 	dta->cmdwh[j] = '\0';
-	printf("%s\n", dta->cmdwh);
+	printf("commande de dta->cmdwh avec spaceadd %s\n", dta->cmdwh);
 	return (dta->cmdwh);
 }

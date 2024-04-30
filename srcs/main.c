@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/04/26 14:43:41 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/04/30 18:34:49 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	main(int argc, char **argv, char **env)
 		set_v(&dta , input);
 		s_quote(&dta, input);
 		countwh_sep(&dta);
-		s_redir(&dta);
-		
+		s_redir(&dta, dta.cmdwh);
+		printf("print main %s\n", dta.cmd_rdr);
 		//countwh_sep(&dta);
 		//init_intforredir(&dta);
 		//free(input);
