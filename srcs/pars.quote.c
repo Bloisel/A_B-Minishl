@@ -6,12 +6,13 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 14:54:10 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/14 15:32:08 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/09 00:59:00 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+// fonction pas utiliser a tchequer pour inserer avec env var environnement etc ... 
 void replace_quote(t_data *dta)
 {
     int i;
@@ -45,7 +46,7 @@ void  remove_q(t_data *dta)
     j = 0;
     while (dta->cmd[i])
     {
-        if (dta->cmd[i] == 34 || dta->cmd[i] == 39 && dta->count != 100)
+        if (dta->cmd[i] == 34 || dta->cmd[i] == 39)
             ;
         else
         {

@@ -12,11 +12,8 @@
 
 #include "../include/minishell.h"
 
-
-// cas echo <<(2,3,4 spaces) ls
-
-
-int countwh_sep(t_data *dta)
+// fctn pour compter les wh a ajouter entre les seperateurs 
+void countwh_sep(t_data *dta)
 {
 	int i;
 	int j;
@@ -50,11 +47,13 @@ int countwh_sep(t_data *dta)
 		}
 		i++;	
 	}
-	res = i + j;
+	res = ((i + j) + 2);
 	dta->cmdwh = (char *)malloc(sizeof(char *) * (i + j) + 1);
 	add_whsep(dta, res);
 }
 
+// verfier le cas avec echo << ls | la 
+// fctn pour ajouter les wh a la chaine malloc 
 char *add_whsep(t_data *dta, int res)
 {
 	int i;
@@ -102,6 +101,6 @@ char *add_whsep(t_data *dta, int res)
 		dta->cmdwh[j++] = dta->cmd[i++];
 	}
 	dta->cmdwh[j] = '\0';
-	printf("commande de dta->cmdwh avec spaceadd %s\n", dta->cmdwh);
+	//printf("commande de dta->cmdwh avec spaceadd %s\n", dta->cmdwh);
 	return (dta->cmdwh);
 }

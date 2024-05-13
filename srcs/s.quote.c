@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 09:40:27 by bloisel           #+#    #+#             */
-/*   Updated: 2024/03/13 18:35:37 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/09 01:02:18 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ int error_s_quote()
 
 int s_quote2(t_data *dta, int splq, int dblq)
 {
-    printf("\n");
     if (splq && !dblq)
     {
-        printf("Error SINGLE\n");
         error_s_quote();
         return (-2);
     }
     if (dblq && !splq)
     {
-        printf("Error DOUBLE\n");
+        printf("%d\n", !splq);
+        printf("%d\n" , dblq);
         error_s_quote();
         return (-2);
     }
@@ -49,18 +48,29 @@ int s_quote(t_data *dta , char *str)
     {
         if (dta->cmd[i] == 39)
         {
-            dta->count++;
+            dta->count = 1;
             if(!dblq)
                 splq = !splq;
         }
         if (dta->cmd[i] == 34)
+        {
+            dta->count = 2;
             if (!splq)
                 dblq = !dblq;
+        }
         i++;   
     }
-    if (!dblq && dta->count > 0)
+    if (dta->count == 1)
         dta->count = 100;
+    if (dta->count == 2)
+        dta->count = 200;
+    printf("%d\n", dta->count);
     if ((!dblq && splq) || (dblq && !splq)) 
         return s_quote2(dta, splq, dblq);
+    // if (!dblq && !splq)
+    // {
+    //     printf("%d\n" , dblq);
+    //     printf("quote ok\n");
+    // }
     return (1);
 }

@@ -12,15 +12,20 @@
 
 #include "../include/minishell.h"
 
+// dans le fichier si plusieurs ligne avant le nom du fichier qui ferme le heardoc ajouter un backslah N '\n'
+// un free a ajouter pour la commande rdr a un moment
+
+// en cas heardoc nouveau readline 
 char *take_input2()
 {
     return readline("> ");
 }
 
-// un free a ajouter pour la commande rdr a un moment 
-int s_redir3(t_data *dta, int k)
+// boucle infinit sur le readline jusqua nom de fichier rencontre , a voir si ajouter '\n' a la fin de chaque argument rentree dans fichier 
+void s_redir3(t_data *dta, int k)
 {
     char *input;
+    char *yes;
     int i;
 
     i = 0;
@@ -33,21 +38,16 @@ int s_redir3(t_data *dta, int k)
 			add_history(input);
         if (ft_strncmp(input , dta->copy , k) == 0)
         {
-            printf("cmd_rdr du heardoc cmd finale = %s\n", dta->cmd_rdr);
-            //return (dta->cmd_rdr);
-            return (0);
             break;
         }
         else
-            dta->cmd_rdr = ft_jointventure(dta->cmd_rdr , input);
+            yes= ft_jointventure(dta->cmd_rdr , input);
+            dta->cmd_rdr = ft_jointventure(yes , "\n");
+            free(yes);
     }
-    printf("cmd_rdr du heardoc cmd finale = %s\n", dta->cmd_rdr);
-    return (0);    
 }
 
-
-
-// PB MALLOC AU NIVEAU DES WH 
+// fonction pour reccuper argument avant heardoc ex : "echo << ls" devient "echo "
 int arg_redir(t_data *dta)
 {
     int i;
@@ -63,8 +63,11 @@ int arg_redir(t_data *dta)
             i++;
         if (dta->cmdwh[i] == '>' || dta->cmdwh[i] == '<')
             break;
-        if (is_sep(dta->cmdwh[i]) == 0)
+        if (is_sep(dta->cmdwh[i]) == 1)
+        {
             start = i;
+            i++;
+        }
         while (is_sep(dta->cmdwh[i]) == 0)
         {
             k++;
@@ -72,23 +75,20 @@ int arg_redir(t_data *dta)
         }
     }
     dta->cmd_rdr = (char *)malloc(sizeof(char *) * (k - start + 1));
-    if (dta->cmd_rdr == NULL)
+    if (dta->cmdwh == NULL)
         return (-1);
     ft_strncpy(dta->cmd_rdr , dta->cmdwh, (k - start + 1));
-    printf("commande avant redir %s\n", dta->cmd_rdr);
-    printf("break sans malloc\n");
+    //printf("tour de arg redir chaine realloc %s\n", dta->cmd_rdr);
     return (0);
 }
 
-// a modifier 
+// join modifier dans le cas ou la chaine 1 est vide au cas ou si argument vide avant heardoc ex : "      <<  ls "
 char	*ft_jointventure(char const *s1, char const *s2)
 {
 	size_t	i;
 	size_t	j;
 	char	*dup;
 
-	//if (!s1 || !s2)
-	//	return (NULL);
 	dup = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!dup)
 		return (NULL);
@@ -103,6 +103,5 @@ char	*ft_jointventure(char const *s1, char const *s2)
 	while (s2[++j])
 		dup[++i] = s2[j];
 	dup[i + 1] = '\0';
-    printf("dup de join venture %s\n", dup);
 	return (dup);
 }

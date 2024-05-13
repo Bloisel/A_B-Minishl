@@ -21,6 +21,8 @@ SRCS = srcs/main.c \
        srcs/pars.quote.c \
        srcs/pars.redir.c \
        srcs/pars.redir2.c\
+	srcs/pars.pipe.c \
+	srcs/pars.env.c \
        	srcs/utils2.c \
 	srcs/utlis3.c \
        	srcs/utils.c
