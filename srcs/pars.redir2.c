@@ -59,6 +59,7 @@ void s_redir2(t_data *dta, int j, int start, int end, int i)
 void s_redir3(t_data *dta, int k)
 {
     char *input;
+    char *tmp;
     char *yes;
     int i;
 
@@ -75,47 +76,24 @@ void s_redir3(t_data *dta, int k)
             break;
         }
         else
-            yes= ft_jointventure(dta->cmd_rdr , input);
-            dta->cmd_rdr = ft_jointventure(yes , "\n");
-            free(yes);
+        {
+        tmp = ft_strdup(input);
+        yes = ft_jointventure(tmp, "\n");
+        printf("input = %s\n", input);
+        printf("yes = %s\n", yes);
+        free(tmp);
+        }
+        // put_str_in_new_file(input , dta->copy, dta);
+            // yes= ft_jointventure(dta->cmd_rdr  , input);
+            // dta->cmd_rdr = ft_jointventure(yes , "\n");
+            // put_str_in_new_file(dta->cmd_rdr, dta->copy, dta);
+            // printf(" yes = %s\n", yes);
+            //dta->cmd_rdr = ft_jointventure(yes , "\n");
+            // if (dta->res > 0)
+            // {
+            //     dta->cmd_rdr = ft_jointventure(yes , dta->cmdhp);
+            // }
+            //free(yes);
     }
-}
-
-// fonction dans le cas ou << se trouve des | chaine de char cmdhp  
-void pipe_heardoc(t_data *dta, int i)
-{
-    int k;
-    int j;
-    int start;
-    int end;
-    int l;
-
-    l = 0;
-    j = (i + 2);
-    k = 0;
-    start = 0;
-    end = 0;
-    while (dta->cmd[j])
-    {
-        if(dta->cmd[j] == '|')
-            l++;
-        j++;
-    }
-    if (l > 0)
-    {
-        j = (i + 2);
-        while (dta->cmdwh[j] != '|')
-            j++;
-        start = j;
-        while (dta->cmdwh[j])
-            j++;
-        j--;
-        end = j;
-        dta->cmdhp = (char *)malloc(sizeof(char *) * (j - start) + 1);
-        if (dta->cmdhp)
-            EXIT_FAILURE;
-        if (end > start)
-            ft_strncpy(dta->cmdhp , &dta->cmdwh[start], (j - start) + 1);
-        printf("heardoc et pipe %s\n", dta->cmdhp);
-    }
+    put_str_in_new_file(input, dta->copy , dta);
 }

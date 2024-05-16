@@ -6,13 +6,17 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/16 18:24:27 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/16 23:14:43 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+
+# include<fcntl.h>
+# include<dirent.h>
+# include<termios.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -93,8 +97,10 @@ int parsing_redir(t_data *dta, int i, int j, int k, int end);
 char *take_input2();
 void s_redir3(t_data *dta, int k);
 void s_redir2(t_data *dta, int j, int start, int end, int i);
-void pipe_heardoc(t_data *dta, int i);
 
+// heardoc
+void    put_str_in_new_file(char *str, char *key, t_data *dta);
+int 				pipe_heardoc(t_data *dta, int i);
 
 //pars env 
 void getline_afterkey(t_data *dta, int *i, int *len);

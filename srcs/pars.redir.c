@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:32:26 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/16 18:30:55 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/16 22:55:59 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,18 +112,20 @@ int parsing_redir(t_data *dta, int i, int j, int k, int end)
                 error_redir();
            if (k == 1 && dta->cmdwh[i + k] == dta->cmdwh[i] && dta->cmdwh[i] == '<')
             {
-                pipe_heardoc(dta, i);
+                dta->res = pipe_heardoc(dta, i);
                 s_redir2(dta, j, start, end, i);
-                dta->res++;
-                // return ? sinon res tjs ok pour conditions  
+                // return ? 
             }
         }
         i++;
     }
     free(dta->cmd);
-    if (dta->res > 0)
+    if (dta->res == 0)
     {
-        printf("okdot");
+        // printf("%s\n", dta->cmd_rdr);
+        dta->cmd_rdr = ft_jointventure(dta->cmd_rdr , dta->cmdhp);
+        printf("%s\n", dta->cmd_rdr);
+        //printf("okdot");
         return (1);
     }
     return (0);
