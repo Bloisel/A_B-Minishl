@@ -16,6 +16,8 @@ void	init_data(t_data *dta)
 {
 	dta->cmd = NULL;
 	dta->cmdwh = NULL;
+	dta->cmd_envr = NULL;
+	dta->cmd2 = NULL;
 	dta->copy = NULL;
 	dta->cmd_rdr = NULL;
 	dta->wc = NULL;
@@ -25,6 +27,7 @@ void	init_data(t_data *dta)
 	dta->cmd_env = NULL;
 	dta->count = 0;
 	dta->error = 0;
+	dta->check = 0;
 }
 
 int set_v(t_data *dta, char *str)

@@ -6,16 +6,19 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 09:40:27 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/09 01:02:18 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/15 18:25:50 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int error_s_quote()
+// bien exit proprement a la fin si erreur 
+
+
+void error_s_quote()
 {
     printf("erreur quote minishell\n");
-    return (-1);
+    //exit;
 }
 
 int s_quote2(t_data *dta, int splq, int dblq)
@@ -27,8 +30,6 @@ int s_quote2(t_data *dta, int splq, int dblq)
     }
     if (dblq && !splq)
     {
-        printf("%d\n", !splq);
-        printf("%d\n" , dblq);
         error_s_quote();
         return (-2);
     }
@@ -60,17 +61,7 @@ int s_quote(t_data *dta , char *str)
         }
         i++;   
     }
-    if (dta->count == 1)
-        dta->count = 100;
-    if (dta->count == 2)
-        dta->count = 200;
-    printf("%d\n", dta->count);
     if ((!dblq && splq) || (dblq && !splq)) 
         return s_quote2(dta, splq, dblq);
-    // if (!dblq && !splq)
-    // {
-    //     printf("%d\n" , dblq);
-    //     printf("quote ok\n");
-    // }
     return (1);
 }

@@ -23,6 +23,7 @@ SRCS = srcs/main.c \
        srcs/pars.redir2.c\
 	srcs/pars.pipe.c \
 	srcs/pars.env.c \
+	srcs/pars.env2.c \
        	srcs/utils2.c \
 	srcs/utlis3.c \
        	srcs/utils.c

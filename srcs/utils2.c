@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:34:59 by bloisel           #+#    #+#             */
-/*   Updated: 2024/04/26 10:41:55 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/15 19:01:56 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,11 @@ int is_sep3(t_data *dta, int pos)
 		|| (dta->cmd[pos] == '<' && dta->cmd[pos + 1] == '<'))
 		return (2);
 	return (1);
+}
+
+int is_sep4(char c)
+{
+	if (c == -34 || c == -39 || c == -32)	
+		return (1);
+	return (0);
 }

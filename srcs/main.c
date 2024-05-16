@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/05 17:28:20 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/15 19:39:09 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,23 @@ int	main(int argc, char **argv, char **env)
 			if (ft_strlen(input) > 0)
 					add_history(input);
 			set_v(&dta , input);
-			s_quote(&dta, input);
+			if (s_quote(&dta, input) != 1)
+				return (1);
 			countwh_sep(&dta);
 			if (s_redir(&dta, dta.cmdwh) == 0)
 				dta.cmd = ft_strdup(dta.cmdwh);
 			else
 				dta.cmd = ft_strdup(dta.cmd_rdr);
-			//dta.cmd = ft_strdup(dta.cmd_rdr);
 			replace_quote(&dta);
-			printf("main = %s\n", dta.cmd);
-			env_copy3(env , &dta);
-			// env_copy2(env, &dta);
-			//replace_quote(&dta);
-			printf("main = %s\n", dta.cmd);
-			//printf("dta commande main %s\n", dta.cmd);
-			//printf("dta commande heardoc %s\n", dta.cmd_rdr);
-	//printf("dta classique cmd %s\n", dta.cmd);
+			remove_q(&dta);
+			//reset_quoteenv(&dta);
+			getline_beforekey(env , &dta);
+	}
+	return (0);
+} 
+
 		// pas oublier d'utiliser la meme chaine 
 		// free aussi contenue 
 		// parsing pipe pipe en fin de chaine 
 		// double pipe 
 		//free(input);
-	}
-	return (0);
-} 
-

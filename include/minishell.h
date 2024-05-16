@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/05 15:24:32 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/16 02:44:35 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ typedef struct s_data
 {
 	int count;
 	char *cmdwh;
-	const char *arg_env;
+	char *cmd_envr;
+	char *arg_env;
+	char *cmd2;
 	char *cmd_env;
 	char *cmd_rdr;
 	char *cmd;
@@ -46,21 +48,22 @@ typedef struct s_data
 	int 	error;
 	char **envv;
 	char *envh;
+	int check;
 }t_data;
 
-
-void get_envln(t_data *dta, char *str);
+char *getline_afterkey(t_data *dta, int *i, int *len);
+int get_envln(t_data *dta, char *str);
 char **env_split(char *env, t_data *dta);
-int env_copy(char **env, t_data *dta);
-int env_copy2(char **env, t_data *dta);
-int env_copy3(char **env, t_data *dta);
+int get_key(t_data *dta);
+int getline_beforekey(char **env, t_data *dta);
 void meta_pars(t_data *dta);
 void replace_quote(t_data *dta);
 void  remove_q(t_data *dta);
+void reset_quoteenv(t_data *dta);
 int	is_sep(char c);
 int search_c(t_data *dta , char c);
 int set_v(t_data *dta, char *str);
-int error_s_quote();
+void error_s_quote();
 int s_quote(t_data *dta, char *str);
 void getln(char *str);
 char	*trytry(char **env, t_data *dta);
@@ -82,8 +85,8 @@ int is_sep2(char c);
 void countwh_sep(t_data *dta);
 char *add_whsep(t_data *dta, int res);
 int is_sep3(t_data *dta, int pos);
+int is_sep4(char c);
 char *ft_joinnewline(char *str);
 void pipe_heardoc(t_data *dta, int i);
-
 
 #endif
