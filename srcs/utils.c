@@ -12,6 +12,9 @@
 
 #include "../include/minishell.h"
 
+
+// fonction error g error etc
+
 void	init_data(t_data *dta)
 {
 	dta->cmd = NULL;
@@ -28,6 +31,7 @@ void	init_data(t_data *dta)
 	dta->count = 0;
 	dta->error = 0;
 	dta->check = 0;
+	dta->res = 0;
 }
 
 int set_v(t_data *dta, char *str)
@@ -45,7 +49,6 @@ int set_v(t_data *dta, char *str)
 		return (-1);	
 	}
 	ft_bzero(dta->wc, ft_strlen(dta->cmd));
-	// fonction error g error etc
 	return (0);
 }
 

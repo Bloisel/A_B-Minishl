@@ -12,13 +12,47 @@
 
 #include "../include/minishell.h"
 
+// CAS PAS GERE 
+//bash-3.2$ echo | < ls wc
+//       1       3      25
+// bash-3.2$ echo | > ls wc
+//
+// C PAS GERE ? 
+// echo << ls | wc (je reccupere bien wc mais fait rien avec ? ) 
+
 // dans le fichier si plusieurs ligne avant le nom du fichier qui ferme le heardoc ajouter un backslah N '\n'
-// un free a ajouter pour la commande rdr a un moment
 
 // en cas heardoc nouveau readline 
 char *take_input2()
 {
     return readline("> ");
+}
+
+// ARTUNG ARTUNG  echo << ls | wc
+// ARTUNG ARTUNG echo << ls << la << pp avec des arguments entre 
+// fctn appelle dans le cas ou heardoc << : permet de stocker le nom du fichier apres HEARDOC
+// attention verifier les cas avec << et | dans la meme ligne 
+void s_redir2(t_data *dta, int j, int start, int end, int i)
+{
+    int k;
+
+    k = 0;
+    j = (i + 2);
+    while (dta->cmdwh[j] == ' ')
+        j++;
+    start = j;
+    while (dta->cmdwh[j] != '\0' && dta->cmdwh[j] != '|' && dta->cmdwh[j] != ' ')
+        j++;
+    j--;
+    end = j;
+    dta->copy = (char *)malloc(sizeof(char *) * (j - start + 1));
+    if (dta->copy == NULL)
+        EXIT_FAILURE;
+    if (end > start)
+        ft_strncpy(dta->copy, &dta->cmdwh[start], (j - start + 1));
+    printf("first redir copy %s\n", dta->copy);
+    k = (j - start + 1);
+    s_redir3(dta, k);
 }
 
 // boucle infinit sur le readline jusqua nom de fichier rencontre , a voir si ajouter '\n' a la fin de chaque argument rentree dans fichier 
@@ -47,61 +81,41 @@ void s_redir3(t_data *dta, int k)
     }
 }
 
-// fonction pour reccuper argument avant heardoc ex : "echo << ls" devient "echo "
-int arg_redir(t_data *dta)
+// fonction dans le cas ou << se trouve des | chaine de char cmdhp  
+void pipe_heardoc(t_data *dta, int i)
 {
-    int i;
-    int start;
     int k;
+    int j;
+    int start;
+    int end;
+    int l;
 
-    i = 0;
-    start = 0;
+    l = 0;
+    j = (i + 2);
     k = 0;
-    while (dta->cmdwh[i] != '<' && dta->cmdwh[i] != '>')
+    start = 0;
+    end = 0;
+    while (dta->cmd[j])
     {
-        while (is_sep(dta->cmdwh[i]) == 1)
-            i++;
-        if (dta->cmdwh[i] == '>' || dta->cmdwh[i] == '<')
-            break;
-        if (is_sep(dta->cmdwh[i]) == 1)
-        {
-            start = i;
-            i++;
-        }
-        while (is_sep(dta->cmdwh[i]) == 0)
-        {
-            k++;
-            i++;
-        }
+        if(dta->cmd[j] == '|')
+            l++;
+        j++;
     }
-    dta->cmd_rdr = (char *)malloc(sizeof(char *) * (k - start + 1));
-    if (dta->cmdwh == NULL)
-        return (-1);
-    ft_strncpy(dta->cmd_rdr , dta->cmdwh, (k - start + 1));
-    //printf("tour de arg redir chaine realloc %s\n", dta->cmd_rdr);
-    return (0);
-}
-
-// join modifier dans le cas ou la chaine 1 est vide au cas ou si argument vide avant heardoc ex : "      <<  ls "
-char	*ft_jointventure(char const *s1, char const *s2)
-{
-	size_t	i;
-	size_t	j;
-	char	*dup;
-
-	dup = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!dup)
-		return (NULL);
-	i = -1;
-	j = -1;
-	if (*s1 != '\0')
+    if (l > 0)
     {
-        while (s1[++i])
-		    dup[i] = s1[i];
-        i--;
+        j = (i + 2);
+        while (dta->cmdwh[j] != '|')
+            j++;
+        start = j;
+        while (dta->cmdwh[j])
+            j++;
+        j--;
+        end = j;
+        dta->cmdhp = (char *)malloc(sizeof(char *) * (j - start) + 1);
+        if (dta->cmdhp)
+            EXIT_FAILURE;
+        if (end > start)
+            ft_strncpy(dta->cmdhp , &dta->cmdwh[start], (j - start) + 1);
+        printf("heardoc et pipe %s\n", dta->cmdhp);
     }
-	while (s2[++j])
-		dup[++i] = s2[j];
-	dup[i + 1] = '\0';
-	return (dup);
 }

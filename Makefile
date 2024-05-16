@@ -6,7 +6,7 @@
 #    By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/21 01:43:02 by bloisel           #+#    #+#              #
-#    Updated: 2024/04/26 10:54:31 by bloisel          ###   ########.fr        #
+#    Updated: 2024/05/16 16:39:23 by bloisel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS = srcs/main.c \
 	srcs/pars.env2.c \
        	srcs/utils2.c \
 	srcs/utlis3.c \
+	srcs/utils4.c \
        	srcs/utils.c
 
 OBJS = $(SRCS:.c=.o)

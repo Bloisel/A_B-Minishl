@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/15 19:39:09 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/16 18:31:40 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		input = take_input();	
-		
 		if (input == NULL)
 					break;
 			if (ft_strlen(input) > 0)
@@ -35,14 +34,16 @@ int	main(int argc, char **argv, char **env)
 			if (s_quote(&dta, input) != 1)
 				return (1);
 			countwh_sep(&dta);
-			if (s_redir(&dta, dta.cmdwh) == 0)
+			printf("%s\n",dta.cmdwh);
+			if (arg_beforeredir(&dta) == 0)
 				dta.cmd = ft_strdup(dta.cmdwh);
 			else
 				dta.cmd = ft_strdup(dta.cmd_rdr);
 			replace_quote(&dta);
 			remove_q(&dta);
-			//reset_quoteenv(&dta);
 			getline_beforekey(env , &dta);
+			printf("%s\n", dta.cmd);
+			free(input);
 	}
 	return (0);
 } 

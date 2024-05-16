@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 14:54:10 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/15 01:29:42 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/16 16:59:20 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,17 @@ void  remove_q(t_data *dta)
     dta->wc[j] = '\0';
     free(dta->cmd);
     dta->cmd = dta->wc;
+}
+
+void reset_quoteenv(t_data *dta)
+{
+		int i;
+
+		i = 0;
+		while (dta->cmd[i])
+		{
+				if (dta->cmd[i] == -34 || dta->cmd[i] == -39)
+					dta->cmd[i] *= -1;
+				i++;
+		}
 }
