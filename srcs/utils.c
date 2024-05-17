@@ -32,6 +32,7 @@ void	init_data(t_data *dta)
 	dta->error = 0;
 	dta->check = 0;
 	dta->res = 0;
+	dta->c = 'a';
 }
 
 int set_v(t_data *dta, char *str)

@@ -12,15 +12,16 @@
 
 #include "../include/minishell.h"
 
-// CAS PAS GERE 
+// CAS PAS GERE ? 
+
 //bash-3.2$ echo | < ls wc
 //       1       3      25
 // bash-3.2$ echo | > ls wc
 //
-// C PAS GERE ? 
-// echo << ls | wc (je reccupere bien wc mais fait rien avec ? ) 
 
-// dans le fichier si plusieurs ligne avant le nom du fichier qui ferme le heardoc ajouter un backslah N '\n'
+// C PAS GERE ?
+
+// echo << ls | wc (je reccupere bien wc mais fait rien avec ? ) 
 
 // en cas heardoc nouveau readline 
 char *take_input2()
@@ -31,7 +32,7 @@ char *take_input2()
 // ARTUNG ARTUNG  echo << ls | wc
 // ARTUNG ARTUNG echo << ls << la << pp avec des arguments entre 
 // fctn appelle dans le cas ou heardoc << : permet de stocker le nom du fichier apres HEARDOC
-// attention verifier les cas avec << et | dans la meme ligne 
+
 void s_redir2(t_data *dta, int j, int start, int end, int i)
 {
     int k;
@@ -63,6 +64,7 @@ void s_redir3(t_data *dta, int k)
     char *yes;
     int i;
 
+    tmp = ft_calloc(1 , 5000);
     i = 0;
     while (1)
     {
@@ -77,23 +79,13 @@ void s_redir3(t_data *dta, int k)
         }
         else
         {
-        tmp = ft_strdup(input);
-        yes = ft_jointventure(tmp, "\n");
-        printf("input = %s\n", input);
-        printf("yes = %s\n", yes);
-        free(tmp);
-        }
-        // put_str_in_new_file(input , dta->copy, dta);
+            yes = ft_jointventure(tmp  , input);
+            tmp = ft_jointventure(yes , "\n");
             // yes= ft_jointventure(dta->cmd_rdr  , input);
             // dta->cmd_rdr = ft_jointventure(yes , "\n");
-            // put_str_in_new_file(dta->cmd_rdr, dta->copy, dta);
-            // printf(" yes = %s\n", yes);
-            //dta->cmd_rdr = ft_jointventure(yes , "\n");
-            // if (dta->res > 0)
-            // {
-            //     dta->cmd_rdr = ft_jointventure(yes , dta->cmdhp);
-            // }
-            //free(yes);
+            // free(yes)
+        }
     }
-    put_str_in_new_file(input, dta->copy , dta);
+    put_str_in_new_file(tmp, dta->copy , dta);
+    // free de tmp et dta->copy inside fonction
 }

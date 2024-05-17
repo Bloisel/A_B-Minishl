@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/16 23:14:43 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/17 02:19:38 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_data
 	char **envv;
 	char *envh;
 	int check;
+	char c;
 }t_data;
 
 // utils 1

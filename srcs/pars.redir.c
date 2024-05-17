@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:32:26 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/16 22:55:59 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/17 02:37:46 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int error_redir()
 }
 
 //fctn pour parsing des redirections 
-// redirection apres un pipe mais jamaias avant
-
+// redirection apres un pipe mais jamais avant
 int arg_beforeredir(t_data *dta)
 {
     int i;
@@ -96,6 +95,7 @@ int intfors_redir(t_data *dta)
 }
 
 // en fonction erreur si < en fin de ligne ou > + < et envoie dans la fonction pars pour le heardoc << 
+// pas gere heardoc avec pipe 
 int parsing_redir(t_data *dta, int i, int j, int k, int end)
 {
     int start;
@@ -122,8 +122,9 @@ int parsing_redir(t_data *dta, int i, int j, int k, int end)
     free(dta->cmd);
     if (dta->res == 0)
     {
+        // endroit pour join avec les pipes pas finti !! 
         // printf("%s\n", dta->cmd_rdr);
-        dta->cmd_rdr = ft_jointventure(dta->cmd_rdr , dta->cmdhp);
+        //dta->cmd_rdr = ft_jointventure(dta->cmd_rdr , dta->cmdhp);
         printf("%s\n", dta->cmd_rdr);
         //printf("okdot");
         return (1);
