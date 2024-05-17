@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:32:26 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/17 02:37:46 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/17 16:00:11 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ int arg_redirbis(t_data *dta, int k, int start)
         return (-1);
     ft_strncpy(dta->cmd_rdr , dta->cmdwh, (k - start + 1));
     printf("tour de arg redir chaine realloc %s\n", dta->cmd_rdr);
+    int i = 0;
+    while(dta->cmd_rdr[i])
+    {
+        i++;
+    }
+    printf("mon i apres malloc depuis cmd %d\n", i);
     return (0); 
 }
 
@@ -91,7 +97,8 @@ int intfors_redir(t_data *dta)
     k = 0;
     end = 0;
     h = parsing_redir(dta, i, j, k, end);
-    return (h); 
+    printf("le h = %d\n",h);
+    return(h); 
 }
 
 // en fonction erreur si < en fin de ligne ou > + < et envoie dans la fonction pars pour le heardoc << 
@@ -112,10 +119,13 @@ int parsing_redir(t_data *dta, int i, int j, int k, int end)
                 error_redir();
            if (k == 1 && dta->cmdwh[i + k] == dta->cmdwh[i] && dta->cmdwh[i] == '<')
             {
-                dta->res = pipe_heardoc(dta, i);
+                dta->start_r = (i + 2);
+                //printf("%c\n", dta->cmd[dta->start_r]);
+                //dta->res = pipe_heardoc(dta, i);
                 s_redir2(dta, j, start, end, i);
                 // return ? 
             }
+            dta->start_r = 0;
         }
         i++;
     }
@@ -125,7 +135,7 @@ int parsing_redir(t_data *dta, int i, int j, int k, int end)
         // endroit pour join avec les pipes pas finti !! 
         // printf("%s\n", dta->cmd_rdr);
         //dta->cmd_rdr = ft_jointventure(dta->cmd_rdr , dta->cmdhp);
-        printf("%s\n", dta->cmd_rdr);
+        printf("dta res :w%s\n", dta->cmd_rdr);
         //printf("okdot");
         return (1);
     }

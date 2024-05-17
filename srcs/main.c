@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/16 21:04:28 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/17 15:58:57 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,22 @@ int	main(int argc, char **argv, char **env)
 				return (1);
 			countwh_sep(&dta);
 			printf("%s\n",dta.cmdwh);
-			if (arg_beforeredir(&dta) == 0)
+			if (arg_beforeredir(&dta) == 1)
 				dta.cmd = ft_strdup(dta.cmdwh);
-			else
+			else	
 				dta.cmd = ft_strdup(dta.cmd_rdr);
 			printf("redir main = %s\n",dta.cmd_rdr);
-			//printf("white space = %s\n",dta.cmdwh);
-			replace_quote(&dta);
-			remove_q(&dta);
-			getline_beforekey(env , &dta);
+			printf("white space = %s\n",dta.cmdwh);
+			// replace_quote(&dta);
+			// remove_q(&dta);
+			// rajouter un if si $ var env sinon malloc pour rien // getline_beforekey(env , &dta);
 			printf("commande main %s\n", dta.cmd);
 			free(input);
 	}
 	return (0);
 } 
 
+// main appele une fonction parsing qui fait tout et renvoie dans le main un triple tab 
 		// pas oublier d'utiliser la meme chaine 
 		// free aussi contenue 
 		// parsing pipe pipe en fin de chaine 

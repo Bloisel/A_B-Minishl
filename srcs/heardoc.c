@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:33:11 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/17 02:35:53 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/17 15:56:20 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,45 @@ int pipe_heardoc(t_data *dta, int i)
     return (1);
 }
 
+void getline_afterkey2(t_data *dta, int *i, int *len)
+{
+        char *tmp;
+		int pos;
+		int len1;
+		
+		pos = (*i + *len);
+		len1 = *i;
+		if (len1 != 1){
+			len1--;
+		}
+        printf("avant join %s\n", dta->cmd);
+		tmp = ft_jointventure_len(dta->cmd_rdr, dta->key_dot, len1, ft_strlen(dta->key_dot));
+        printf("%s\n",tmp);
+		dta->cmd = ft_jointventure(tmp , &dta->cmd[pos]);
+        printf("apres join %s\n",dta->cmd);
+}
+
+
 
 // key = nom de fichier str ce qui est ecrit apres 
 void    put_str_in_new_file(char *str, char *key, t_data *dta)
 {
     int        fd;
-    char    *key_dot;
+    //char    *key_dot;
     char    *tmp;
-     
+    char    test[2];
+    char *cmd_f;
+    int i;
+    
+    test[0] = dta->c;
+    test[1] = 0;
     tmp = ft_strjoin(".", key);
-    key_dot = ft_strjoin(tmp , &dta->c);
-    printf("key.dot %s\n", key_dot);
+    dta->key_dot = ft_strjoin(tmp , test);
+    printf("key.dot %s\n", dta->key_dot);
     dta->c++;
-	if (open(key_dot, O_WRONLY, 0644) > 0)
-        unlink(key_dot);
-    fd = open(key_dot, O_WRONLY | O_CREAT, 0644);
+	if (open(dta->key_dot, O_WRONLY, 0644) > 0)
+        unlink(dta->key_dot);
+    fd = open(dta->key_dot, O_WRONLY | O_CREAT, 0644);
     if (fd == -1)
     {
         perror("Error when opening the file");
@@ -76,43 +100,17 @@ void    put_str_in_new_file(char *str, char *key, t_data *dta)
     if (str[0] != '\0' && str[0] != '\n')
         write(fd, str, ft_strlen(str));
     //store_key(dta, key_dot);
+    
+    int j = ft_strlen(dta->key_dot);
+    //getline_afterkey2(dta, &dta->start_r, &j);
+    //str_remanier(dta);
+    //printf("%s\n", dta->cmd_rdr);
     close(fd);
+    //cmd_f = ft_strjoin(dta->cmd_rdr, key_dot);
+    // printf("cmd_f = %s\n", cmd_f);
     if (str != NULL)
         free(str);
     free(key);
     free(tmp);
 }
-
-// void	init_keys(t_data *dta, char *key)
-// {
-// 	dta->keys = malloc(sizeof(char *) * 2);
-// 	dta->keys[0] = key;
-// 	dta->keys[1] = NULL;
-// }
-
-
-// void	store_key(t_data *dta, char *key)
-// {
-// 	char	**tmp;
-// 	int		i;
-
-// 	i = -1;
-// 	if (dta->keys == NULL)
-// 		init_keys(dta, key);
-// 	else
-// 	{
-// 		while (dta->keys[++i])
-// 			if (!ft_strncmp(dta->keys[i], key, 1024))
-// 				return ;
-// 		tmp = malloc(sizeof(char *) * (i + 2));
-// 		i = -1;
-// 		while (dta->keys[++i])
-// 			tmp[i] = dta->keys[i];
-// 		tmp[i] = key;
-// 		tmp[i + 1] = NULL;
-// 		if (dta->keys)
-// 			free(dta->keys);
-// 		dta->keys = tmp;
-// 	}
-// }
 

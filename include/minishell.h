@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/17 02:19:38 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/17 15:40:57 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_data
 {
 	int count;
 	int res;
+	char *key_dot;
 	char *cmdwh;
 	char *cmd_envr;
 	char *arg_env;
@@ -51,6 +52,7 @@ typedef struct s_data
 	char *copy;
 	char *cmdhp;
 	int 	error;
+	int  start_r;
 	char **envv;
 	char *envh;
 	int check;

@@ -18,6 +18,7 @@
 void	init_data(t_data *dta)
 {
 	dta->cmd = NULL;
+	dta->key_dot = NULL;
 	dta->cmdwh = NULL;
 	dta->cmd_envr = NULL;
 	dta->cmd2 = NULL;
@@ -33,6 +34,7 @@ void	init_data(t_data *dta)
 	dta->check = 0;
 	dta->res = 0;
 	dta->c = 'a';
+	dta->start_r = 0;
 }
 
 int set_v(t_data *dta, char *str)

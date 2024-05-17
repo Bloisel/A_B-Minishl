@@ -64,7 +64,7 @@ void s_redir3(t_data *dta, int k)
     char *yes;
     int i;
 
-    tmp = ft_calloc(1 , 5000);
+    tmp = NULL;
     i = 0;
     while (1)
     {
@@ -79,13 +79,20 @@ void s_redir3(t_data *dta, int k)
         }
         else
         {
-            yes = ft_jointventure(tmp  , input);
-            tmp = ft_jointventure(yes , "\n");
-            // yes= ft_jointventure(dta->cmd_rdr  , input);
-            // dta->cmd_rdr = ft_jointventure(yes , "\n");
-            // free(yes)
+            if (!tmp)
+            {
+                tmp = ft_strdup("");
+            }
+            yes = tmp;
+            tmp = ft_strjoin(tmp , input);
+            free(yes);
+            yes = tmp;
+            tmp = ft_jointventure(tmp, "\n");
+            free(yes);
+            printf("%s\n",tmp);
         }
     }
-    put_str_in_new_file(tmp, dta->copy , dta);
+    //put_str_in_new_file(tmp, dta->copy , dta);
+    free(dta->copy);
     // free de tmp et dta->copy inside fonction
 }
