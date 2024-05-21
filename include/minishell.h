@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/17 15:40:57 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/20 02:48:23 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_data
 	int res;
 	char *key_dot;
 	char *cmdwh;
+	char *cmd_f;
 	char *cmd_envr;
 	char *arg_env;
 	char *cmd2;
@@ -55,6 +56,7 @@ typedef struct s_data
 	int  start_r;
 	char **envv;
 	char *envh;
+	char *copyh;
 	int check;
 	char c;
 }t_data;
@@ -90,6 +92,7 @@ void reset_quoteenv(t_data *dta);
 
 //pars redir 
 int error_redir();
+int error_redir2();
 int arg_beforeredir(t_data *dta);
 int arg_redir(t_data *dta);
 int arg_redirbis(t_data *dta, int k, int start);
@@ -100,10 +103,12 @@ int parsing_redir(t_data *dta, int i, int j, int k, int end);
 char *take_input2();
 void s_redir3(t_data *dta, int k);
 void s_redir2(t_data *dta, int j, int start, int end, int i);
+void s_redir4(t_data *dta, int *j, int k);
+
 
 // heardoc
 void    put_str_in_new_file(char *str, char *key, t_data *dta);
-int 				pipe_heardoc(t_data *dta, int i);
+int 				pipe_heardoc(t_data *dta, int *i);
 
 //pars env 
 void getline_afterkey(t_data *dta, int *i, int *len);

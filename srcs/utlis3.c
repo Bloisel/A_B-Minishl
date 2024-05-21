@@ -52,7 +52,6 @@ void countwh_sep(t_data *dta)
 	add_whsep(dta, res);
 }
 
-// verfier le cas avec echo << ls | la 
 // fctn pour ajouter les wh a la chaine malloc 
 char *add_whsep(t_data *dta, int res)
 {
@@ -64,7 +63,7 @@ char *add_whsep(t_data *dta, int res)
 	i = 0;
 	j = 0;
 	
-	while (dta->cmd[i] && res >= j)
+	while (dta->cmd[i])
 	{
 		if (is_sep2(dta->cmd[i]) == 1)
 		{
@@ -101,6 +100,5 @@ char *add_whsep(t_data *dta, int res)
 		dta->cmdwh[j++] = dta->cmd[i++];
 	}
 	dta->cmdwh[j] = '\0';
-	//printf("commande de dta->cmdwh avec spaceadd %s\n", dta->cmdwh);
 	return (dta->cmdwh);
 }

@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:32:26 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/17 16:00:11 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/21 18:26:19 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 int error_redir()
 {
-    printf("erreur redirection minishell\n");
+    printf("syntax error near unexpected token `newline'\n");
+    return (-1);
+}
+
+int error_redir2()
+{
+    printf("syntax error near unexpected token `<'\n");
     return (-1);
 }
 
@@ -37,7 +43,7 @@ int arg_beforeredir(t_data *dta)
         i++;
     }
     j = intfors_redir(dta);
-    printf("%d\n",j);
+    //printf("%d\n",j);
     return (j);
 }
 
@@ -51,19 +57,13 @@ int arg_redir(t_data *dta)
     i = 0;
     start = 0;
     k = 0;
-    while (dta->cmdwh[i] != '<' && dta->cmdwh[i] != '>')
+    start = i;
+    while (dta->cmdwh[i])
     {
-        while (is_sep(dta->cmdwh[i]) == 1)
-            i++;
-        if (dta->cmdwh[i] == '>' || dta->cmdwh[i] == '<')
+        if (dta->cmdwh[i] == '<' && dta->cmdwh[i + 1] == '<')
             break;
-        if (is_sep(dta->cmdwh[i]) == 1)
-            start = i++;
-        while (is_sep(dta->cmdwh[i]) == 0)
-        {
-            k++;
-            i++;
-        }
+        k++;
+        i++;
     }
     arg_redirbis(dta, k , start);
 }
@@ -73,14 +73,8 @@ int arg_redirbis(t_data *dta, int k, int start)
     dta->cmd_rdr = (char *)malloc(sizeof(char *) * (k - start + 1));
     if (dta->cmd_rdr == NULL)
         return (-1);
-    ft_strncpy(dta->cmd_rdr , dta->cmdwh, (k - start + 1));
+    ft_strncpy(dta->cmd_rdr , dta->cmdwh, (k - start));
     printf("tour de arg redir chaine realloc %s\n", dta->cmd_rdr);
-    int i = 0;
-    while(dta->cmd_rdr[i])
-    {
-        i++;
-    }
-    printf("mon i apres malloc depuis cmd %d\n", i);
     return (0); 
 }
 
@@ -97,7 +91,7 @@ int intfors_redir(t_data *dta)
     k = 0;
     end = 0;
     h = parsing_redir(dta, i, j, k, end);
-    printf("le h = %d\n",h);
+    //printf("le h = %d\n",h);
     return(h); 
 }
 
@@ -106,7 +100,9 @@ int intfors_redir(t_data *dta)
 int parsing_redir(t_data *dta, int i, int j, int k, int end)
 {
     int start;
-
+    char *tmp;
+    //tmp = ft_strdup("");
+        
     start = 0;
     while(dta->cmdwh[i])
     {
@@ -116,28 +112,25 @@ int parsing_redir(t_data *dta, int i, int j, int k, int end)
             if (k == 1 && dta->cmdwh[i + k] == '\0' && dta->cmdwh[i + k] != dta->cmdwh[i])
                 error_redir();
             if (k > 1 && dta->cmdwh[i + k] && (dta->cmdwh[i + k] == '>' || dta->cmdwh[i + k] == '<'))
-                error_redir();
-           if (k == 1 && dta->cmdwh[i + k] == dta->cmdwh[i] && dta->cmdwh[i] == '<')
+                error_redir2();
+            if (k == 1 && dta->cmdwh[i + k] == dta->cmdwh[i] && dta->cmdwh[i] == '<')
             {
                 dta->start_r = (i + 2);
                 //printf("%c\n", dta->cmd[dta->start_r]);
-                //dta->res = pipe_heardoc(dta, i);
+                //dta->res = pipe_heardoc(dta, &i);
                 s_redir2(dta, j, start, end, i);
-                // return ? 
+                tmp = ft_strdup("");
+                tmp = ft_strjoin(tmp , dta->cmd_f);
+                dta->res++;
+                dta->cmd = ft_strjoin(tmp, dta->copyh);
+                printf("dta-> cmd finale dans fonction heardoc %s\n", dta->cmd);
+                if (dta->copyh != NULL)
+                    free(dta->copyh);
+                free(tmp);
             }
             dta->start_r = 0;
         }
         i++;
-    }
-    free(dta->cmd);
-    if (dta->res == 0)
-    {
-        // endroit pour join avec les pipes pas finti !! 
-        // printf("%s\n", dta->cmd_rdr);
-        //dta->cmd_rdr = ft_jointventure(dta->cmd_rdr , dta->cmdhp);
-        printf("dta res :w%s\n", dta->cmd_rdr);
-        //printf("okdot");
-        return (1);
     }
     return (0);
 }

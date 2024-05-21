@@ -12,13 +12,6 @@
 
 #include "../include/minishell.h"
 
-// CAS PAS GERE ? 
-
-//bash-3.2$ echo | < ls wc
-//       1       3      25
-// bash-3.2$ echo | > ls wc
-//
-
 // C PAS GERE ?
 
 // echo << ls | wc (je reccupere bien wc mais fait rien avec ? ) 
@@ -51,9 +44,41 @@ void s_redir2(t_data *dta, int j, int start, int end, int i)
         EXIT_FAILURE;
     if (end > start)
         ft_strncpy(dta->copy, &dta->cmdwh[start], (j - start + 1));
-    printf("first redir copy %s\n", dta->copy);
+    //printf("first redir copy %s\n", dta->copy);
     k = (j - start + 1);
+    s_redir4(dta, &dta->start_r, k);
+    //s_redir3(dta, k);
+}
+
+void s_redir4(t_data *dta, int *j , int k)
+{
+    int i;
+    int start;
+    int end;
+    int h = (*j);
+
+    i = 0;
+    printf("h1 = %d\n", h);
+    while(dta->cmdwh[h] && is_sep(dta->cmdwh[h]) == 1)
+        h++;
+    printf("k2 = %d\n", k);
+    start = (h + ft_strlen(dta->copy));
+    printf("start = %d\n", start);
+    while(dta->cmdwh[h])
+    {
+        if(dta->cmdwh[h] && dta->cmdwh[h] == '<' && dta->cmdwh[h + 1] == '<')
+            break;
+        h++; 
+    }
+    h--;
+    end = h;
+    dta->copyh = (char *)malloc(sizeof(char *) * (end - start + 1));
+    if (dta->copyh == NULL)
+        EXIT_FAILURE;
+    ft_strncpy(dta->copyh, &dta->cmdwh[start], (end - start));
+    printf("copy heardoc %s\n" , dta->copyh);
     s_redir3(dta, k);
+    
 }
 
 // boucle infinit sur le readline jusqua nom de fichier rencontre , a voir si ajouter '\n' a la fin de chaque argument rentree dans fichier 
@@ -75,6 +100,7 @@ void s_redir3(t_data *dta, int k)
 			add_history(input);
         if (ft_strncmp(input , dta->copy , k) == 0)
         {
+            tmp = ft_strdup("");
             break;
         }
         else
@@ -84,15 +110,19 @@ void s_redir3(t_data *dta, int k)
                 tmp = ft_strdup("");
             }
             yes = tmp;
+            printf("tmp = %s\n",tmp);
             tmp = ft_strjoin(tmp , input);
+            printf("tmp = %s\n",tmp);
             free(yes);
             yes = tmp;
             tmp = ft_jointventure(tmp, "\n");
+            printf("tmp = %s\n",tmp);
             free(yes);
-            printf("%s\n",tmp);
+            printf("tmp = %s\n",tmp);
         }
     }
-    //put_str_in_new_file(tmp, dta->copy , dta);
-    free(dta->copy);
+    put_str_in_new_file(tmp, dta->copy , dta);
+    // put_str_in_new_file(tmp, dta->copy , dta);
+    //free(dta->copy);
     // free de tmp et dta->copy inside fonction
 }

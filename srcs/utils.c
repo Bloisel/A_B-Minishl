@@ -29,6 +29,8 @@ void	init_data(t_data *dta)
 	dta->envv = NULL;
 	dta->arg_env = NULL;
 	dta->cmd_env = NULL;
+	dta->copyh = NULL;
+	dta->cmd_f = NULL;
 	dta->count = 0;
 	dta->error = 0;
 	dta->check = 0;

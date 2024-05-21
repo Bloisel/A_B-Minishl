@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:16:50 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/16 15:58:40 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/20 01:30:48 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int get_key(t_data *dta)
 						len = ft_strlen(key);
 						if (get_envln(dta , key) == 0){
 							getline_afterkey(dta, &start , &len);
-						}
 						free(key);
+						}
+						//free(key);
 						start = 0;
 						dta->count = 0;
 					}
