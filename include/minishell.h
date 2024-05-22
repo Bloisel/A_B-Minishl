@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/20 02:48:23 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/22 03:51:14 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ void reset_quoteenv(t_data *dta);
 //pars redir 
 int error_redir();
 int error_redir2();
-int arg_beforeredir(t_data *dta);
-int arg_redir(t_data *dta);
-int arg_redirbis(t_data *dta, int k, int start);
-int intfors_redir(t_data *dta);
+void arg_beforeredir(t_data *dta);
+void arg_redir(t_data *dta);
+void arg_redirbis(t_data *dta, int k, int start);
+void intfors_redir(t_data *dta);
 int parsing_redir(t_data *dta, int i, int j, int k, int end);
 
 // pars redir 2
@@ -108,7 +108,9 @@ void s_redir4(t_data *dta, int *j, int k);
 
 // heardoc
 void    put_str_in_new_file(char *str, char *key, t_data *dta);
-int 				pipe_heardoc(t_data *dta, int *i);
+int 	pipe_heardoc(t_data *dta, int *i);
+int 	getline_beforekey2(t_data *dta);
+void 	getline_afterkey2(t_data *dta, int *i);
 
 //pars env 
 void getline_afterkey(t_data *dta, int *i, int *len);
@@ -118,5 +120,8 @@ int getline_beforekey(char **env, t_data *dta);
 
 // pars env2
 char **env_split(char *env, t_data *dta);
+
+// pars pipe
+int pars_pipe(t_data *dta);
 
 #endif

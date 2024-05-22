@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:16:50 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/20 01:30:48 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/22 03:37:47 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int get_key(t_data *dta)
 							getline_afterkey(dta, &start , &len);
 						free(key);
 						}
-						//free(key);
 						start = 0;
-						dta->count = 0;
 					}
 					i++;
 			}
@@ -72,9 +70,12 @@ int getline_beforekey(char **env, t_data *dta)
 					}
 					i++;
 			}
-			dta->envh = (char *)malloc(sizeof(char *) * (end - start + 1));
-			dta->envh = ft_strncpy(dta->envh , &dta->cmd[0], (end - start));
-			get_key(dta);
+			if (end > 0 || dta->cmd[0] == '$')
+			{
+				dta->envh = (char *)malloc(sizeof(char *) * (end - start + 1));
+				dta->envh = ft_strncpy(dta->envh , &dta->cmd[0], (end - start));
+				get_key(dta);
+			}
 			return 0;
 }
 

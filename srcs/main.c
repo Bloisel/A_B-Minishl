@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/20 06:43:16 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/22 03:56:25 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,14 @@ int	main(int argc, char **argv, char **env)
 			set_v(&dta , input);
 			if (s_quote(&dta, input) != 1)
 				return (1);
+			dta.cmd2 = ft_strdup(input);
 			countwh_sep(&dta);
-			arg_beforeredir(&dta);
-			
-			// if (arg_beforeredir(&dta) == 1)
-			// 	dta.cmd = ft_strdup(dta.cmdwh);
-			// else	
-			// 	dta.cmd = ft_strdup(dta.cmd_rdr);
+			intfors_redir(&dta);
+			pars_pipe(&dta);
 			// // replace_quote(&dta);
 			// // remove_q(&dta);
 			// // rajouter un if si $ var env sinon malloc pour rien // getline_beforekey(env , &dta);
+			
 			printf("commande main %s\n", dta.cmd);
 			free(input);
 	}
