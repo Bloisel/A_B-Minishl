@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/22 03:51:14 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/05/27 23:03:04 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,13 @@ typedef struct s_data
 	char *copyh;
 	int check;
 	char c;
+	int st;
+	int key_done;
+	char **keys;
 }t_data;
+
+
+extern int get_exit_status;
 
 // utils 1
 void	init_data(t_data *dta);
@@ -123,5 +129,11 @@ char **env_split(char *env, t_data *dta);
 
 // pars pipe
 int pars_pipe(t_data *dta);
+
+// signal 
+void	init_signal(t_data *dta, struct sigaction *sa,
+			struct termios *terminal);
+void	handle_sig(int signum, siginfo_t *info, void *ptr);
+void	handle_sig_alt(int signum, siginfo_t *info, void *ptr);
 
 #endif
