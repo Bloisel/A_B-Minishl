@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:03:40 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/27 23:03:04 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/06/07 02:40:40 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define MINISHELL_H
 
 
-# include<fcntl.h>
-# include<dirent.h>
-# include<termios.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <fcntl.h>
+# include <dirent.h>
+# include <termios.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -26,9 +28,17 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <errno.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include "../lib/libft.h"
+
+
+
+// struct pipe
+typedef struct 
+{
+    char ***commands;
+    int num_commands;
+} CommandData;
+
 
 // struct pour cellules en cas de pipe 
 typedef	struct			s_tab
@@ -69,6 +79,7 @@ extern int get_exit_status;
 
 // utils 1
 void	init_data(t_data *dta);
+void init_data3(CommandData *data);
 int set_v(t_data *dta, char *str);
 char *ft_strncpy(char *s1, char *s2, int n);
 
@@ -130,10 +141,21 @@ char **env_split(char *env, t_data *dta);
 // pars pipe
 int pars_pipe(t_data *dta);
 
-// signal 
+// signal
 void	init_signal(t_data *dta, struct sigaction *sa,
 			struct termios *terminal);
 void	handle_sig(int signum, siginfo_t *info, void *ptr);
 void	handle_sig_alt(int signum, siginfo_t *info, void *ptr);
+
+
+// triple tab
+void free_commands(CommandData *data);
+void print_commands(const CommandData *data);
+void parse_commands(CommandData *data, const char *input);
+void free_split_result(char **result);
+char **split_string(const char *str, char delimiter);
+int count_delimiter(const char *str, char delimiter);
+
+
 
 #endif

@@ -6,11 +6,13 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 01:09:56 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/22 03:56:25 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/06/07 03:22:27 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int get_exit_status;
 
 char *take_input()
 {
@@ -20,9 +22,15 @@ char *take_input()
 int	main(int argc, char **argv, char **env) 
 {
 	t_data	dta;
+	CommandData data;
 	char 		*input;	
-		
+	struct sigaction	sa;
+	struct termios		terminal;
+
+	
 	init_data(&dta);
+	init_data3(&data);
+	init_signal(&dta, &sa , &terminal);
 	while (1)
 	{
 		input = take_input();	
@@ -37,11 +45,15 @@ int	main(int argc, char **argv, char **env)
 			countwh_sep(&dta);
 			intfors_redir(&dta);
 			pars_pipe(&dta);
+			// handle_sig()
 			// // replace_quote(&dta);
 			// // remove_q(&dta);
-			// // rajouter un if si $ var env sinon malloc pour rien // getline_beforekey(env , &dta);
-			
-			printf("commande main %s\n", dta.cmd);
+			if(pars_pipe(&dta) == 0)
+			{
+				parse_commands(&data, input);
+   	print_commands(&data);
+   	free_commands(&data);
+			}
 			free(input);
 	}
 	return (0);

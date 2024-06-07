@@ -6,7 +6,7 @@
 #    By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/21 01:43:02 by bloisel           #+#    #+#              #
-#    Updated: 2024/05/16 16:39:23 by bloisel          ###   ########.fr        #
+#    Updated: 2024/06/06 17:21:12 by bloisel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,12 @@ LIBFTNAME = libft.a
 CFLAGS =   
 DEBUG = -g -O0
 
-SRCS = srcs/main.c \
-       srcs/s.quote.c \
-       srcs/pars.quote.c \
-       srcs/pars.redir.c \
-       srcs/pars.redir2.c\
+
+SRCS =	srcs/main.c \
+      	srcs/s.quote.c \
+      	srcs/pars.quote.c \
+      	srcs/pars.redir.c \
+      	srcs/pars.redir2.c\
 	srcs/tab.c \
 	srcs/pars.signe.c \
 	srcs/heardoc.c \
@@ -63,7 +64,7 @@ $(NAME): $(OBJS)
 	@mv $(LIBFTPATH)$(LIBFTNAME) ./
 	@echo "${_BOLD}${_GREEN}Done 🙈${_END}"
 	@echo "${_BOLD}${_BLUE}Comilation ...${_END}"
-	@${CC} ${CFLAGS} $(OBJS) $(LIBFTNAME) -o $(NAME) -lreadline
+	@${CC}${FLAGS} ${CPPFLAGS} ${LDFLAGS} -lreadline ${OBJS} ${LIBFTNAME} -o ${NAME}	
 	@echo "${_BOLD}${_GREEN}Done 🙈${_END}"
 
 clean: header

@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:11:00 by bloisel           #+#    #+#             */
-/*   Updated: 2024/05/27 23:01:58 by bloisel          ###   ########.fr       */
+/*   Updated: 2024/06/06 17:26:12 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	handle_sig(int signum, siginfo_t *info, void *ptr)
 	{
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("", 1);
+		//rl_replace_line("", 1);
 		rl_redisplay();
 	}
 	if (signum == SIGQUIT)

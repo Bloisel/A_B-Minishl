@@ -39,6 +39,12 @@ void	init_data(t_data *dta)
 	dta->start_r = 0;
 }
 
+void init_data3(CommandData *data) 
+{
+  data->commands = NULL;
+  data->num_commands = 0;
+}
+
 int set_v(t_data *dta, char *str)
 {
 	dta->cmd = ft_strdup(str);
